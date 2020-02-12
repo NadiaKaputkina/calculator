@@ -1,0 +1,9 @@
+.TabBarItem {
+  background-color: darkgray;
+}
+
+.TabBarItem:hover,
+.TabBarItem:active,
+.TabBarItem.active {
+  background-color: #61dafb;
+}
