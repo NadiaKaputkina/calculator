@@ -1,31 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import Button from '../../components/Button/Button';
 import classes from './ButtonGroup.css';
 
-class ButtonGroup extends Component {
-  state = {
+const buttonGroup = ({listOfValue, selectedValue, changeSelectedValue}) => {
 
-  };
-
-  changeActiveBtn = () => {
-
-  };
-
-  render() {
-    const { listOfValue, defaultValue } = this.props;
-
-    const btnGroup = listOfValue.map(value => {
-      return <Button key={value}
-                     classes={(value === defaultValue) ? classes.Active : null}
-                     handleClick={this.changeActiveBtn}>{value}
+    const btnGroup = listOfValue.map(value =>
+      <Button key={value}
+              selectedBtn={(value === selectedValue) ? classes.Active : null}>
+        { value }
       </Button>
-    });
+    );
 
-    console.log(btnGroup);
-
-    return btnGroup;
-  }
+    return (
+      <div className={classes.ButtonGroup} onClick={changeSelectedValue}>
+        { btnGroup }
+      </div>
+    )
 }
 
-export default ButtonGroup;
+export default buttonGroup;

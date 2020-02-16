@@ -3,41 +3,77 @@ import './App.css';
 
 import TabBar from './components/TabBar/TabBar';
 import TabBarItem from './components/TabBar/TabBarItem/TabBarItem';
-import LoanContainer from './containers/LoanContainer';
-import LeaseContainer from './containers/LeaseContainer';
+import LoanContainer from './containers/Loan';
+import LeaseContainer from './containers/Lease';
+import Spinner from './components/Spinner/Spinner';
+import InfoCard from './containers/InfoCard/InfoCard';
+import {DEFAULT_DOWN_PAYMENT, DEFAULT_TRADE_IN, DEFAULT_CREDIT_SCORE} from "./constants/constants";
+import classes from './App.css';
+import mockData from './constants/mockData';
 
 class App extends Component {
   state = {
-    tradeIn: 0,
-    downPayment: 0,
-    creditScore: 750,
-    zipCode: null,
+    tradeIn: DEFAULT_TRADE_IN,
+    downPayment: DEFAULT_DOWN_PAYMENT,
+    creditScore: DEFAULT_CREDIT_SCORE,
+    postCode: null,
+    info: null,
+    lease: null,
+    loan: null
   };
 
-  handleChange = () => {
-    this.setState({})
+  calculate = () => {
+    console.log('calculate')
+  };
+
+  onChangeHandler = (event) => {
+    const {name, value} = event.target;
+
+    this.setState({
+      [name]: value
+    },
+      this.calculate()
+    )
+  };
+
+  getLocalPostCode = () => {
+    const LOCATION_API_TOKEN = 'b6d69c0ea5d585';
+
+    return fetch(`https://ipinfo.io/json?token=${LOCATION_API_TOKEN}`)
+    .then(res => res.json())
   };
 
   componentDidMount() {
-    const LOCATION_API_TOKEN = 'b6d69c0ea5d585';
+    console.log('[App] componentDidMount');
 
-    fetch(`https://ipinfo.io/json?token=${LOCATION_API_TOKEN}`)
-      .then(res => res.json())
-      .then(res => this.setState());
+    this.getLocalPostCode()
+      .then(res => this.setState({ postCode: res.postal }));
+
+    Promise.resolve(mockData)
+      .then(res => this.setState({ info: res }));
   }
 
   render() {
-    const spinner = <div>Spinner</div>;
+    console.log('[App] render');
+    const spinner = (!this.state.postCode && !this.state.info) ? <Spinner/> : null;
 
     return (
+      <div className={classes.App}>
         <TabBar>
-          <TabBarItem label="Loan">
-            <LoanContainer props={this.state} />
+          <TabBarItem label="Loan" value={this.state.loan}>
+            { spinner || <LoanContainer {...this.state}
+                                        onChangeHandler={this.onChangeHandler}/>
+            }
           </TabBarItem>
-          <TabBarItem label="Lease">
-            <LeaseContainer props={this.state} />
+          <TabBarItem label="Lease" value={this.state.lease}>
+            {spinner || <LeaseContainer {...this.state}
+                                        onChangeHandler={this.onChangeHandler}/>
+            }
           </TabBarItem>
         </TabBar>
+
+        {spinner || <InfoCard info={this.state.info} postCode={this.state.postCode}/>}
+      </div>
     );
   }
 }

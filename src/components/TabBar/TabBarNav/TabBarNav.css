@@ -1,0 +1,17 @@
+.TabBarNav {
+  flex: 1;
+  background-color: #FFF;
+  border: 1px solid #887a5e;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.Active {
+  background-color: #ddd3b6;
+  color: #FFF;
+}

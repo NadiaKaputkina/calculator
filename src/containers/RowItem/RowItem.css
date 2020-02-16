@@ -1,0 +1,6 @@
+.RowItem {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row;
+  padding: 10px;
+}

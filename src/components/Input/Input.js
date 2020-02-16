@@ -1,8 +1,19 @@
 import React from 'react';
 
-const input = ({handleChange, defaultValue}) => {
+import Aux from '../../hoc/Aux/Aux';
+import classes from './Input.css';
+
+const input = ({type, name, value, handleChange, ...attrs}) => {
   return (
-    <input type="text" onChange={handleChange}>{defaultValue}</input>
+    <Aux>
+      { attrs.prefix && <span>$</span>  }
+      <input type={type}
+             name={name}
+             className={classes.Input}
+             value={value}
+             onChange={handleChange} />
+      { attrs.postfix && <span>%</span> }
+    </Aux>
   )
 };
 

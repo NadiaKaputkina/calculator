@@ -1,9 +1,8 @@
 .TabBarItem {
-  background-color: darkgray;
+  height: 0;
+  overflow: hidden;
 }
 
-.TabBarItem:hover,
-.TabBarItem:active,
-.TabBarItem.active {
-  background-color: #61dafb;
+.Active {
+  height: auto;
 }

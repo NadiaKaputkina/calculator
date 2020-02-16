@@ -1,7 +1,15 @@
 .TabBarNav {
-  background-color: aquamarine;
+  position: relative;
+  display: flex;
+  z-index: 2;
 }
 
 .TabContainer {
-  background-color: aquamarine;
+  padding: 20px;
+  min-height: 100px;
+  border: 1px solid #887a5e;
+  border-top-color: #ddd3b6;
+  background-color: #ddd3b6;
+  border-radius: 0 0 5px 5px;
+
 }

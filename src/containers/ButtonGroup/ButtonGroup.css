@@ -1,3 +1,8 @@
-.Active {
+.ButtonGroup {
+  position: absolute;
+  display: contents;
+}
 
+.Active {
+  background-color: #887a5e;
 }

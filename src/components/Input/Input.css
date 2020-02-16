@@ -1,0 +1,14 @@
+.Input {
+  height: 5vh;
+  max-height: 20px;
+
+  padding: 5px;
+  border: 1px solid #887a5e;
+}
+
+span {
+  padding: 5px;
+
+  background-color: #887a5e;
+  color: #ffffff;
+}

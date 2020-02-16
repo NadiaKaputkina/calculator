@@ -1,12 +1,13 @@
 import React from 'react';
 
-const button = ({classes, handleClick, children}) => {
+import classes from './Button.css';
+
+const button = ({selectedBtn, children}) => {
+  const currentClasses = [classes.Button, selectedBtn];
+
   return (
-    <button type="button"
-            className={classes}
-            onClick={handleClick}
-    >
-      {children}
+    <button className={currentClasses.join(' ')} value={children} >
+      { children }
     </button>
   )
 };
